@@ -106,3 +106,5 @@ Post: /roles/role
 }
 
 Delete: /roles/role/2
+
+Note, the testing is not part of this guided part. It is used in just a video!
