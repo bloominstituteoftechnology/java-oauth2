@@ -1,10 +1,10 @@
-package com.lambdaschool.authenticatedusers.repository;
+package com.lambdaschool.starthere.repository;
 
-        import com.lambdaschool.authenticatedusers.model.Role;
-        import org.springframework.data.jpa.repository.Modifying;
-        import org.springframework.data.jpa.repository.Query;
-        import org.springframework.data.repository.CrudRepository;
-        import org.springframework.transaction.annotation.Transactional;
+import com.lambdaschool.starthere.models.Role;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface RoleRepository extends CrudRepository<Role, Long>
 {
@@ -17,5 +17,4 @@ public interface RoleRepository extends CrudRepository<Role, Long>
     @Modifying
     @Query(value = "INSERT INTO UserRoles(userid, roleid) values (:userid, :roleid)", nativeQuery = true)
     void insertUserRoles(long userid, long roleid);
-
 }
