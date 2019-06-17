@@ -89,6 +89,21 @@ public class UserServiceImpl implements UserDetailsService, UserService
         return userrepos.save(newUser);
     }
 
+    @Override
+    public User findUserByName(String name)
+    {
+        User currentUser = userrepos.findByUsername(name);
+
+        if (currentUser != null)
+        {
+            return currentUser;
+        }
+        else
+        {
+            throw new EntityNotFoundException(name);
+        }
+    }
+
     @Transactional
     @Override
     public User update(User user, long id)

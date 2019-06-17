@@ -46,7 +46,7 @@ public class UserController
     @ResponseBody
     public ResponseEntity<?> getCurrentUserName(Authentication authentication)
     {
-        return new ResponseEntity<>(authentication.getPrincipal(), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findUserByName(authentication.getName()).getUserid(), HttpStatus.OK);
     }
 
 

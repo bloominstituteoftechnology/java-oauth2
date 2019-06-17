@@ -63,6 +63,13 @@ public class QuotesController
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
+    @PutMapping(value = "/quote/{quoteid}")
+    public ResponseEntity<?> updateQuote(@RequestBody
+                                                Quote updateQuote, @PathVariable long quoteid)
+    {
+        quoteService.update(updateQuote, quoteid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @DeleteMapping("/quote/{id}")
     public ResponseEntity<?> deleteQuoteById(@PathVariable long id)

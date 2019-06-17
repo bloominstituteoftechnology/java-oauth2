@@ -1,5 +1,7 @@
 package com.lambdaschool.authenticatedusers;
 
+// Vivek Vishwanath
+
 import com.lambdaschool.authenticatedusers.model.Quote;
 import com.lambdaschool.authenticatedusers.model.Role;
 import com.lambdaschool.authenticatedusers.model.User;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 @Component
 public class SeedData implements CommandLineRunner
 {
+
     RoleRepository rolerepos;
     UserRepository userrepos;
     QuoteRepository todorepos;
