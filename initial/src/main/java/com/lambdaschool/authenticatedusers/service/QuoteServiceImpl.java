@@ -2,7 +2,6 @@ package com.lambdaschool.authenticatedusers.service;
 
 import com.lambdaschool.authenticatedusers.model.Quote;
 import com.lambdaschool.authenticatedusers.repository.QuoteRepository;
-import com.lambdaschool.authenticatedusers.view.CountQuotes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +15,6 @@ public class QuoteServiceImpl implements QuoteService
 {
     @Autowired
     private QuoteRepository quoterepos;
-
-    @Override
-    public ArrayList<CountQuotes> getCountQuotes()
-    {
-        return quoterepos.getCountQuotes();
-    }
 
     @Override
     public List<Quote> findAll()
