@@ -7,6 +7,7 @@ import com.lambdaschool.oauth2.models.Useremail;
 import com.lambdaschool.oauth2.repository.RoleRepository;
 import com.lambdaschool.oauth2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserDetailsService,
         {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),
+        return new org.springframework.security.core.userdetails.User(user.getUsername().toLowerCase(),
                                                                       user.getPassword(),
                                                                       user.getAuthority());
     }
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserDetailsService,
     @Override
     public List<User> findByNameContaining(String username)
     {
-        return userrepos.findByUsernameContainingIgnoreCase(username.toUpperCase());
+        return userrepos.findByUsernameContainingIgnoreCase(username.toLowerCase());
     }
 
     @Override
@@ -91,15 +92,15 @@ public class UserServiceImpl implements UserDetailsService,
     @Override
     public User save(User user)
     {
-        if (userrepos.findByUsername(user.getUsername()) != null)
+        if (userrepos.findByUsername(user.getUsername().toLowerCase()) != null)
         {
             throw new EntityNotFoundException(user.getUsername() + " is already taken!");
         }
 
         User newUser = new User();
-        newUser.setUsername(user.getUsername());
+        newUser.setUsername(user.getUsername().toLowerCase());
         newUser.setPasswordNoEncrypt(user.getPassword());
-        newUser.setPrimaryemail(user.getPrimaryemail());
+        newUser.setPrimaryemail(user.getPrimaryemail().toLowerCase());
 
         ArrayList<UserRoles> newRoles = new ArrayList<>();
         for (UserRoles ur : user.getUserroles())
@@ -140,7 +141,7 @@ public class UserServiceImpl implements UserDetailsService,
 
             if (user.getUsername() != null)
             {
-                currentUser.setUsername(user.getUsername());
+                currentUser.setUsername(user.getUsername().toLowerCase());
             }
 
             if (user.getPassword() != null)
@@ -150,7 +151,7 @@ public class UserServiceImpl implements UserDetailsService,
 
             if (user.getPrimaryemail() != null)
             {
-                currentUser.setPrimaryemail(user.getPrimaryemail());
+                currentUser.setPrimaryemail(user.getPrimaryemail().toLowerCase());
             }
 
             if (user.getUserroles()
