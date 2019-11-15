@@ -1,8 +1,11 @@
 package com.lambdaschool.usermodel.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lambdaschool.usermodel.logging.Loggable;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Loggable
 @Entity
@@ -17,6 +20,19 @@ public class Book extends Auditable {
     private String ISBN;
     @Column(nullable = true)
     private int copy;
+
+    @ManyToMany
+    @JsonIgnoreProperties("books")
+    private List<Author> authors = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "sectionid")
+    @JsonIgnoreProperties("books")
+    private Section section;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("book")
+    private List<Wrote> writers = new ArrayList<>();
 
 
     public Book(){}

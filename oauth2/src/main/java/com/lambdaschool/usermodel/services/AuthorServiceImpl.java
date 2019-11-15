@@ -53,7 +53,7 @@ public class AuthorServiceImpl implements AuthorService {
         Author newAuthor = new Author();
         newAuthor.setFname(author.getFname());
         newAuthor.setLname(author.getLname());
-        if (author.getWrote().size() > 0) throw new ResourceNotFoundException("no author found");
+        if (author.getWriter().size() > 0) throw new ResourceNotFoundException("no author found");
         return authorRepo.save(author);
     }
 
@@ -62,7 +62,7 @@ public class AuthorServiceImpl implements AuthorService {
         Author currentAuthor = findAuthorById(id);
         currentAuthor.setFname(author.getFname());
         currentAuthor.setLname(author.getLname());
-        if (author.getWrote().size() > 0) throw new ResourceNotFoundException("no author found");
+        if (author.getWriter().size() > 0) throw new ResourceNotFoundException("no author found");
         return authorRepo.save(author);
     }
 }

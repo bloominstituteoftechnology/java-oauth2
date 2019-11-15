@@ -18,16 +18,13 @@ public class Author extends Auditable{
     private String fname;
     private String lname;
 
-    @OneToMany(mappedBy = "author",
-            cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("author")
-    private List<Wrote> wrote = new ArrayList<>();
-
-    @OneToMany(mappedBy = "author",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    @JsonIgnoreProperties("author")
+    @ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = "authors")
     private List<Book> books = new ArrayList<>();
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("author")
+    private List<Wrote> writer = new ArrayList<>();
 
     public Author() {}
 
@@ -56,12 +53,12 @@ public class Author extends Auditable{
         return lname;
     }
 
-    public List<Wrote> getWrote() {
-        return wrote;
+    public List<Wrote> getWriter() {
+        return writer;
     }
 
-    public void setWrote(List<Wrote> wrote) {
-        this.wrote = wrote;
+    public void setWriter(List<Wrote> writer) {
+        this.writer = writer;
     }
 
     public List<Book> getBooks() {
