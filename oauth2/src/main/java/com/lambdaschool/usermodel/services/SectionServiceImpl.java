@@ -88,7 +88,7 @@ public class SectionServiceImpl implements SectionService
     {
         Section newSection = new Section();
         newSection.setName(section.getName());
-        if (section.getWrote()
+        if (section.getBooks()
                 .size() > 0)
         {
             throw new ResourceFoundException("User Roles are not updated through Role. See endpoint POST: users/user/{userid}/role/{roleid}");

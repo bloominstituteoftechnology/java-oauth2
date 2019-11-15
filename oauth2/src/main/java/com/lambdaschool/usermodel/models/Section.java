@@ -1,32 +1,30 @@
 package com.lambdaschool.usermodel.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.lambdaschool.usermodel.logging.Loggable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Loggable
 @Entity
-@Table(name = "sections")
-public class Section extends Auditable{
-
+@Table(name = "section")
+public class Section extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long sectionid;
 
+    @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "section",
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "section", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("section")
-    private List<Wrote> wrote = new ArrayList<>();
+    private List<Book> books = new ArrayList<>();
 
+    public Section() {
+    }
 
-    public Section(){}
-    public Section(String name) {
-        this.name = name;
+    public Section(String sectionname) {
+        this.name = sectionname;
     }
 
     public long getSectionid() {
@@ -41,15 +39,15 @@ public class Section extends Auditable{
         return name;
     }
 
-    public List<Wrote> getWrote() {
-        return wrote;
-    }
-
-    public void setWrote(List<Wrote> wrote) {
-        this.wrote = wrote;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }
