@@ -1,5 +1,6 @@
 package com.lambdaschool.usermodel.services;
 
+import com.lambdaschool.usermodel.logging.Loggable;
 import com.lambdaschool.usermodel.models.User;
 import com.lambdaschool.usermodel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+@Loggable
+@Transactional
 @Service(value = "securityUserService")
 public class SecurityUserServiceImpl implements UserDetailsService
 {
