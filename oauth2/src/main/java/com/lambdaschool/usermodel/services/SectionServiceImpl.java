@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Loggable
-@Service(value = "roleService")
+@Service(value = "sectionService")
 public class SectionServiceImpl implements SectionService
 {
     @Autowired
