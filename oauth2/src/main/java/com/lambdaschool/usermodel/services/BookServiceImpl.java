@@ -5,10 +5,11 @@ import com.lambdaschool.usermodel.models.Book;
 import com.lambdaschool.usermodel.repository.AuthorRepo;
 import com.lambdaschool.usermodel.repository.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service(value = "bookService")
 public class BookServiceImpl implements BookService {
 
     @Autowired

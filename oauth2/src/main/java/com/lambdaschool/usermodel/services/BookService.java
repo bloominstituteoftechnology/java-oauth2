@@ -1,6 +1,7 @@
 package com.lambdaschool.usermodel.services;
 
 import com.lambdaschool.usermodel.models.Book;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
