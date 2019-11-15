@@ -41,6 +41,14 @@ public class Section extends Auditable{
         return name;
     }
 
+    public List<Wrote> getWrote() {
+        return wrote;
+    }
+
+    public void setWrote(List<Wrote> wrote) {
+        this.wrote = wrote;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

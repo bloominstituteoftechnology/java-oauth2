@@ -56,6 +56,22 @@ public class Author extends Auditable{
         return lname;
     }
 
+    public List<Wrote> getWrote() {
+        return wrote;
+    }
+
+    public void setWrote(List<Wrote> wrote) {
+        this.wrote = wrote;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
     public void setLname(String lname) {
         this.lname = lname;
     }
