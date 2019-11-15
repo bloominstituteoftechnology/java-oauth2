@@ -1,9 +1,12 @@
 package com.lambdaschool.usermodel.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.lambdaschool.usermodel.logging.Loggable;
 
+import javax.persistence.*;
+
+@Loggable
+@Entity
+@Table(name = "sections")
 public class Section {
 
     @Id
