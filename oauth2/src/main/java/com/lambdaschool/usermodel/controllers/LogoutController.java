@@ -1,6 +1,7 @@
 package com.lambdaschool.usermodel.controllers;
 
 import com.lambdaschool.usermodel.logging.Loggable;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Loggable
 @Controller
+@Api(tags = {"LogoutEndpoint"})
 public class LogoutController
 {
     private static final Logger logger = LoggerFactory.getLogger(LogoutController.class);

@@ -39,7 +39,7 @@ public class UserController
     // http://localhost:2019/users/users/?page=1&size=1
     // http://localhost:2019/users/users/?sort=username,desc&sort=<field>,asc
     // http://localhost:2019/users/users
-    @ApiOperation(value = "returns all Users",
+    @ApiOperation(value = "returns all Users with paging and sorting",
                   response = User.class,
                   responseContainer = "List")
     @ApiImplicitParams({@ApiImplicitParam(name = "page",
@@ -72,6 +72,9 @@ public class UserController
 
 
     // http://localhost:2019/users/allusers
+    @ApiOperation(value = "returns all Users without paging or sorting",
+                  response = User.class,
+                  responseContainer = "List")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/allusers",
                 produces = {"application/json"})
@@ -111,10 +114,20 @@ public class UserController
 
 
     // http://localhost:2019/users/user/name/cinnamon
+    @ApiOperation(value = "returns the user based off of user name",
+                  response = User.class)
+    @ApiResponses(value = {@ApiResponse(code = 200,
+                                        message = "User Found",
+                                        response = User.class), @ApiResponse(code = 404,
+                                                                             message = "User Not Found",
+                                                                             response = ErrorDetail.class)})
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/user/name/{userName}",
                 produces = {"application/json"})
     public ResponseEntity<?> getUserByName(HttpServletRequest request,
+                                           @ApiParam(value = "Username",
+                                                     required = true,
+                                                     example = "somename")
                                            @PathVariable
                                                    String userName)
     {
@@ -128,6 +141,9 @@ public class UserController
 
 
     // http://localhost:2019/users/user/name/like/da?sort=username
+    @ApiOperation(value = "returns all Users whose name contains the given substring with paging and sorting",
+                  response = User.class,
+                  responseContainer = "List")
     @ApiImplicitParams({@ApiImplicitParam(name = "page",
                                           dataType = "integer",
                                           paramType = "query",
@@ -143,6 +159,9 @@ public class UserController
     @GetMapping(value = "/user/name/like/{userName}",
                 produces = {"application/json"})
     public ResponseEntity<?> getUserLikeName(
+            @ApiParam(value = "Username",
+                      required = true,
+                      example = "partofname")
             @PathVariable
                     String userName,
             @PageableDefault(page = 0,
@@ -184,6 +203,13 @@ public class UserController
                     ]
             }
      */
+    @ApiOperation(value = "adds a user given in the request body",
+                  response = Void.class)
+    @ApiResponses(value = {@ApiResponse(code = 200,
+                                        message = "User Found",
+                                        response = User.class), @ApiResponse(code = 404,
+                                                                             message = "User Not Found",
+                                                                             response = ErrorDetail.class)})
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping(value = "/user",
                  consumes = {"application/json"})

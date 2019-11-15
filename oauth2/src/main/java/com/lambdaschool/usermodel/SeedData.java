@@ -11,12 +11,14 @@ import com.lambdaschool.usermodel.services.RoleService;
 import com.lambdaschool.usermodel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Locale;
 
-//@Transactional
-//@Component
+@Transactional
+@Component
 public class SeedData implements CommandLineRunner
 {
     @Autowired

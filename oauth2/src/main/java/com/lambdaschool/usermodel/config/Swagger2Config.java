@@ -2,6 +2,7 @@ package com.lambdaschool.usermodel.config;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.lambdaschool.usermodel.models.ErrorDetail;
+import com.lambdaschool.usermodel.models.TokenModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,14 +39,19 @@ public class Swagger2Config
                                                       .ignoredParameterTypes(Pageable.class) // allows only my paging parameter list
                                                       .apiInfo(apiEndPointsInfo())
                                                       .pathMapping("/")
-                                                      .additionalModels(resolver.resolve(ErrorDetail.class))
+                                                      .additionalModels(resolver.resolve(ErrorDetail.class),
+                                                                        resolver.resolve(TokenModel.class))
                                                       .ignoredParameterTypes()
                                                       .tags(new Tag("UserEndpoints",
                                                                     "Endpoints driven by users"),
                                                             new Tag("RolesEndpoints",
                                                                     "Endpoints driven by roles"),
                                                             new Tag("UseremailEndpoints",
-                                                                    "Endpoints driven by Useremails"));
+                                                                    "Endpoints driven by Useremails"),
+                                                            new Tag("LogoutEndpoint",
+                                                                    "Endpoint for logging out a user"),
+                                                            new Tag("OpenEndpoint",
+                                                                    "Endpoints available to all"));
 
     }
 
