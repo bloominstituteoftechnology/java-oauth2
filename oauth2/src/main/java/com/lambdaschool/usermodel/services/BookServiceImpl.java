@@ -53,7 +53,7 @@ public class BookServiceImpl implements BookService {
         if (book.getISBN() != null) {
             currentBook.setISBN(book.getISBN());
         }
-      
+
             currentBook.getCopy();
 
         return bookRepo.save(book);
