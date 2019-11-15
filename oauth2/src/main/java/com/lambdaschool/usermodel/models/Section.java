@@ -1,19 +1,27 @@
 package com.lambdaschool.usermodel.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lambdaschool.usermodel.logging.Loggable;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Loggable
 @Entity
 @Table(name = "sections")
-public class Section {
+public class Section extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long sectionid;
 
     private String name;
+
+    @OneToMany(mappedBy = "section",
+            cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("section")
+    private List<Wrote> wrote = new ArrayList<>();
 
 
     public Section(){}
