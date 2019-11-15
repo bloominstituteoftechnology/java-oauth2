@@ -52,7 +52,7 @@ public class Book extends Auditable {
     }
 
     public int getCopy() {
-        return copy;
+        return this.copy;
     }
 
     public void setCopy(int copy) {
