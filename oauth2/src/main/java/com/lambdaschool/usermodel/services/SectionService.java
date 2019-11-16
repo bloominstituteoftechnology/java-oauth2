@@ -1,6 +1,5 @@
 package com.lambdaschool.usermodel.services;
 
-import com.lambdaschool.usermodel.models.Role;
 import com.lambdaschool.usermodel.models.Section;
 
 import java.util.List;

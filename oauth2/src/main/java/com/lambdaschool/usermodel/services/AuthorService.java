@@ -1,7 +1,6 @@
 package com.lambdaschool.usermodel.services;
 
 import com.lambdaschool.usermodel.models.Author;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 

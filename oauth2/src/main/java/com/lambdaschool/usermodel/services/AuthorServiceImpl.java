@@ -1,20 +1,12 @@
 package com.lambdaschool.usermodel.services;
 
-import com.lambdaschool.usermodel.exceptions.ResourceFoundException;
 import com.lambdaschool.usermodel.exceptions.ResourceNotFoundException;
 import com.lambdaschool.usermodel.logging.Loggable;
-import com.lambdaschool.usermodel.models.*;
+import com.lambdaschool.usermodel.models.Author;
 import com.lambdaschool.usermodel.repository.AuthorRepo;
 import com.lambdaschool.usermodel.repository.BookRepo;
-import com.lambdaschool.usermodel.repository.RoleRepository;
-import com.lambdaschool.usermodel.repository.UserRepository;
-import com.lambdaschool.usermodel.view.UserNameCountEmails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
