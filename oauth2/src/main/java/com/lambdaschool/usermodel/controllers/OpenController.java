@@ -25,6 +25,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// TODO CU 1
 @Loggable
 @RestController
 @Api(tags = {"OpenEndpoint"})
@@ -80,7 +82,7 @@ public class OpenController
         newuser.setUsername(newminuser.getUsername());
         newuser.setPassword(newminuser.getPassword());
         newuser.setPrimaryemail(newminuser.getPrimaryemail());
-
+//TODO CU 1a (auto defaults to user)(requires model UserMinimum)
         ArrayList<UserRoles> newRoles = new ArrayList<>();
         newRoles.add(new UserRoles(newuser,
                                    roleService.findByName("user")));

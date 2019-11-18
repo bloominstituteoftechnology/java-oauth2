@@ -2,6 +2,8 @@ package com.lambdaschool.usermodel.models;
 
 import com.lambdaschool.usermodel.logging.Loggable;
 
+//TODO CU 2 the model
+
 @Loggable
 public class UserMinimum
 {
