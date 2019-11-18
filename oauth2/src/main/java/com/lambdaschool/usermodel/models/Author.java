@@ -28,9 +28,11 @@ public class Author extends Auditable{
 
     public Author() {}
 
-    public Author(String fname, String lname) {
+    public Author(String fname, String lname, List<Book> books, List<Wrote> writer) {
         this.fname = fname;
         this.lname = lname;
+        this.books = books;
+        this.writer = writer;
     }
 
     public long getBookid() {

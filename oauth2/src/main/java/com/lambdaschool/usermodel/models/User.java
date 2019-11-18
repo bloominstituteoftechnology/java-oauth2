@@ -130,13 +130,13 @@ public class User extends Auditable
     {
         return password;
     }
-
+//TODO AUTH 5 ENCRYPT THE PASSWORD
     public void setPassword(String password)
     {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.password = passwordEncoder.encode(password);
     }
-
+//TODO AUTH 6 NON ENCODED
     public void setPasswordNotEncrypt(String password)
     {
         this.password = password;
@@ -161,6 +161,8 @@ public class User extends Auditable
     {
         this.useremails = useremails;
     }
+
+    //TODO AUTH 4 SimpleGrantAuthority
 
     @JsonIgnore
     public List<SimpleGrantedAuthority> getAuthority()

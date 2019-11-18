@@ -37,10 +37,13 @@ public class Book extends Auditable {
 
     public Book(){}
 
-    public Book(String title, String ISBN, int copy) {
+    public Book(String title, String ISBN, int copy, List<Author> authors, Section section, List<Wrote> writers) {
         this.title = title;
         this.ISBN = ISBN;
         this.copy = copy;
+        this.authors = authors;
+        this.section = section;
+        this.writers = writers;
     }
 
     public List<Author> getAuthors() {

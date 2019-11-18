@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
-
+//TODO AUTH 7 this is to logout
 @Loggable
 @Controller
 @Api(tags = {"LogoutEndpoint"})

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+// TODO AUTH 3 (helps logining in)
+
 @Service(value = "securityUserService")
 public class SecurityUserServiceImpl implements UserDetailsService
 {

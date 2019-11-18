@@ -1,5 +1,4 @@
 package com.lambdaschool.usermodel.config;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
+
+//TODO 8 db switch
 @Configuration
 public class DataSourceConfig
 {
@@ -56,7 +57,7 @@ public class DataSourceConfig
             {
                 logger.info("Manually shutting down system");
                 int exitCode = SpringApplication.exit(appContext,
-                                                      (ExitCodeGenerator) () -> 1);
+                        () -> 1);
                 System.exit(exitCode);
             }
 
@@ -75,11 +76,11 @@ public class DataSourceConfig
 
         logger.info("Database URL is " + myUrlString);
         return DataSourceBuilder.create()
-                                .username(myDBUser)
-                                .password(myDBPassword)
-                                .url(myUrlString)
-                                .driverClassName(myDriverClass)
-                                .build();
+                .username(myDBUser)
+                .password(myDBPassword)
+                .url(myUrlString)
+                .driverClassName(myDriverClass)
+                .build();
     }
 
     @Bean(name = "jdbcCustom")

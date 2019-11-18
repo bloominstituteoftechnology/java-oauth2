@@ -10,6 +10,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
+// TODO AUTH 1
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter
@@ -17,7 +19,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     static final String CLIENT_ID = System.getenv("OAUTHCLIENTID");
     static final String CLIENT_SECRET = System.getenv("OAUTHCLIENTSECRET");
 
-    static final String GRANT_TYPE_PASSWORD = "password";
+    static final String GRANT_TYPE_PASSWORD = "Acura35RL!";
     static final String AUTHORIZATION_CODE = "authorization_code";
     static final String IMPLICIT = "implicit";
     static final String SCOPE_READ = "read";
