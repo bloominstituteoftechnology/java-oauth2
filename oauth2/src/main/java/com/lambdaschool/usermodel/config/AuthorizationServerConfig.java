@@ -19,7 +19,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     static final String CLIENT_ID = System.getenv("OAUTHCLIENTID");
     static final String CLIENT_SECRET = System.getenv("OAUTHCLIENTSECRET");
 
-    static final String GRANT_TYPE_PASSWORD = "Acura35RL!";
+    static final String GRANT_TYPE_PASSWORD = "password";
     static final String AUTHORIZATION_CODE = "authorization_code";
     static final String IMPLICIT = "implicit";
     static final String SCOPE_READ = "read";
