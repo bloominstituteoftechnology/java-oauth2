@@ -112,7 +112,7 @@
     </dependencies>
 
     <build>
-        <finalName>ay-usermodel</finalName>
+        <finalName>als-usermodel</finalName>
 
         <plugins>
             <plugin>
@@ -131,7 +131,7 @@
                     <includeTarget>false</includeTarget>
                     <includes>
                         <!--   For windows      <include>${project.build.directory}\${project.build.finalName}.jar</include>-->
-                        <include>${project.build.directory}/${project.build.finalName}.jar</include>
+                        <include>${project.build.directory}\${project.build.finalName}.jar</include>
                     </includes>
                     <jdkVersion>${java.version}</jdkVersion>
                     <processTypes>
