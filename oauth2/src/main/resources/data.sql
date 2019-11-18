@@ -1,3 +1,4 @@
+
 INSERT INTO section (sectionid, name, created_by, created_date, last_modified_by, last_modified_date) VALUES (1, 'Fiction', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
 INSERT INTO section (sectionid, name, created_by, created_date, last_modified_by, last_modified_date) VALUES (2, 'Technology', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
 INSERT INTO section (sectionid, name, created_by, created_date, last_modified_by, last_modified_date) VALUES (3, 'Travel', 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
@@ -25,3 +26,4 @@ INSERT INTO wrote (bookid, authorid, created_by, created_date, last_modified_by,
 INSERT INTO wrote (bookid, authorid, created_by, created_date, last_modified_by, last_modified_date) VALUES (5, 4, 'SYSTEM', CURRENT_TIMESTAMP, 'SYSTEM', CURRENT_TIMESTAMP);
 
 alter sequence hibernate_sequence restart with 25;
+

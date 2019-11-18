@@ -9,7 +9,7 @@ import java.util.List;
 
 @Loggable
 @Entity
-@Table(name = "books")
+@Table(name = "book")
 public class Book extends Auditable {
 
     @Id
@@ -21,9 +21,9 @@ public class Book extends Auditable {
     @Column(nullable = true)
     private int copy;
 
-    @ManyToMany
-    @JsonIgnoreProperties("books")
-    private List<Author> authors = new ArrayList<>();
+   // @ManyToMany
+   // @JsonIgnoreProperties("books")
+   // private List<Author> authors = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "sectionid")
@@ -37,22 +37,19 @@ public class Book extends Auditable {
 
     public Book(){}
 
-    public Book(String title, String ISBN, int copy, List<Author> authors, Section section, List<Wrote> writers) {
+    public Book(String title, String ISBN, int copy,Section section) {
         this.title = title;
         this.ISBN = ISBN;
         this.copy = copy;
-        this.authors = authors;
         this.section = section;
-        this.writers = writers;
     }
+// public List<Author> getAuthors() {
+//     return authors;
+// }
 
-    public List<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
+// public void setAuthors(List<Author> authors) {
+//     this.authors = authors;
+// }
 
     public Section getSection() {
         return section;
