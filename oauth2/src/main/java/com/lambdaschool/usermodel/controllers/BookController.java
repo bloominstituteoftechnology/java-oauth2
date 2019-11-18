@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/books")
+@RequestMapping(value = "/book")
 public class BookController {
 
     @Autowired
@@ -31,9 +31,9 @@ public class BookController {
 
     // http://localhost:2021/books/books/1
     @PutMapping(value = "/books/{id}", consumes = {"application/json"})
-    public ResponseEntity<?> updateBookById(HttpServletRequest request, @RequestBody Book book, @PathVariable long bookid) {
+    public ResponseEntity<?> updateBookById(HttpServletRequest request, @RequestBody Book book, @PathVariable long id) {
         logger.info(request.getMethod().toUpperCase() + " " + request.getRequestURI() + " accessed");
-        bookService.update(bookid, book);
+        bookService.update(id, book);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
