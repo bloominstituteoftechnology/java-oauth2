@@ -21,7 +21,7 @@ public class BookController {
 
     private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 
-    // http://localhost:2021/books/books
+    // http://localhost:2021/book/books
     @GetMapping(value = "/books", produces = "application/json")
     ResponseEntity<?> getBooks(){
         logger.info("books/books Accessed");
