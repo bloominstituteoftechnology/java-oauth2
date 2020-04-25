@@ -1,0 +1,9 @@
+com.lambdaschool.usermodel
+com.lambdaschool.usermodel.config
+com.lambdaschool.usermodel.controllers
+com.lambdaschool.usermodel.exceptions
+com.lambdaschool.usermodel.handlers
+com.lambdaschool.usermodel.models
+com.lambdaschool.usermodel.repository
+com.lambdaschool.usermodel.services
+com.lambdaschool.usermodel.views
