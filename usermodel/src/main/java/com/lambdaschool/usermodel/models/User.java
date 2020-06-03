@@ -26,19 +26,19 @@ import java.util.List;
  * The entity allowing interaction with the users table
  */
 @ApiModel(value = "User",
-    description = "Yes, this is an actual user")
+        description = "Yes, this is an actual user")
 @Entity
 @Table(name = "users")
 public class User
-    extends Auditable
+        extends Auditable
 {
     /**
      * The primary key (long) of the users table.
      */
     @ApiModelProperty(name = "user id",
-        value = "primary key for User",
-        required = true,
-        example = "1")
+            value = "primary key for User",
+            required = true,
+            example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userid;
@@ -47,26 +47,26 @@ public class User
      * The username (String). Cannot be null and must be unique
      */
     @ApiModelProperty(name = "User Name",
-        value = "Actual user name for sign on",
-        required = true,
-        example = "Some Name")
+            value = "Actual user name for sign on",
+            required = true,
+            example = "Some Name")
     @Size(min = 2,
-        max = 30,
-        message = "User Name must be between 2 and 30 characters")
+            max = 30,
+            message = "User Name must be between 2 and 30 characters")
     @NotNull
     @Column(nullable = false,
-        unique = true)
+            unique = true)
     private String username;
 
     /**
      * The password (String) for this user. Cannot be null. Never get displayed
      */
     @ApiModelProperty(name = "password",
-        value = "The password for this user",
-        required = true,
-        example = "ILuvM4th!")
+            value = "The password for this user",
+            required = true,
+            example = "ILuvM4th!")
     @Size(min = 4,
-        message = "Password must 4 or more characters")
+            message = "Password must 4 or more characters")
     @NotNull
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -76,22 +76,22 @@ public class User
      * Primary email account of user. Could be used as the userid. Cannot be null and must be unique.
      */
     @ApiModelProperty(name = "primary email",
-        value = "The email for this user",
-        required = true,
-        example = "john@lambdaschool.com")
+            value = "The email for this user",
+            required = true,
+            example = "john@lambdaschool.com")
     @NotNull
     @Column(nullable = false,
-        unique = true)
+            unique = true)
     @Email
     private String primaryemail;
 
     @ApiModelProperty(name = "user emails",
-        value = "List of user emails for this users")
+            value = "List of user emails for this users")
     @OneToMany(mappedBy = "user",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true)
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JsonIgnoreProperties(value = "user",
-        allowSetters = true)
+            allowSetters = true)
     private List<Useremail> useremails = new ArrayList<>();
 
     /**
@@ -99,11 +99,11 @@ public class User
      * connects users to the user role combination
      */
     @ApiModelProperty(name = "roles",
-        value = "List of user roles for this users")
+            value = "List of user roles for this users")
     @OneToMany(mappedBy = "user",
-        cascade = CascadeType.ALL)
+            cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = "user",
-        allowSetters = true)
+            allowSetters = true)
     private List<UserRoles> roles = new ArrayList<>();
 
     /**
@@ -124,10 +124,10 @@ public class User
      * @param userRoles    The list of roles (userroles) assigned to this user
      */
     public User(
-        String username,
-        String password,
-        String primaryemail,
-        List<UserRoles> userRoles)
+            String username,
+            String password,
+            String primaryemail,
+            List<UserRoles> userRoles)
     {
         setUsername(username);
         setPassword(password);
@@ -288,7 +288,7 @@ public class User
     public void addRole(Role role)
     {
         roles.add(new UserRoles(this,
-            role));
+                role));
     }
 
     /**
@@ -305,8 +305,8 @@ public class User
         for (UserRoles r : this.roles)
         {
             String myRole = "ROLE_" + r.getRole()
-                .getName()
-                .toUpperCase();
+                    .getName()
+                    .toUpperCase();
             rtnList.add(new SimpleGrantedAuthority(myRole));
         }
 

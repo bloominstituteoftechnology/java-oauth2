@@ -40,14 +40,15 @@ public class H2ServerConfiguration
      */
     @Bean
     @ConditionalOnExpression("${h2.tcp.enabled:true}")
-    public Server h2TcpServer() throws
-                                SQLException
+    public Server h2TcpServer()
+            throws
+            SQLException
     {
         return Server.createTcpServer("-tcp",
-            "-tcpAllowOthers",
-            "-tcpPort",
-            h2TcpPort)
-            .start();
+                "-tcpAllowOthers",
+                "-tcpPort",
+                h2TcpPort)
+                .start();
     }
 
     /**
@@ -60,13 +61,14 @@ public class H2ServerConfiguration
      */
     @Bean
     @ConditionalOnExpression("${h2.web.enabled:true}")
-    public Server h2WebServer() throws
-                                SQLException
+    public Server h2WebServer()
+            throws
+            SQLException
     {
         return Server.createWebServer("-web",
-            "-webAllowOthers",
-            "-webPort",
-            h2WebPort)
-            .start();
+                "-webAllowOthers",
+                "-webPort",
+                h2WebPort)
+                .start();
     }
 }

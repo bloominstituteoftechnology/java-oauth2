@@ -2,9 +2,7 @@ package com.lambdaschool.usermodel.models;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A class used to display error messages in our own chosen format

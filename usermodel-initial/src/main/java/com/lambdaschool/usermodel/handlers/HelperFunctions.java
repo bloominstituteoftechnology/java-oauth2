@@ -42,7 +42,7 @@ public class HelperFunctions
             {
                 ValidationError newVe = new ValidationError();
                 newVe.setCode(cv.getInvalidValue()
-                    .toString());
+                        .toString());
                 newVe.setMessage(cv.getMessage());
                 listVE.add(newVe);
             }

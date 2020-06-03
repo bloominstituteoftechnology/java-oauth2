@@ -11,7 +11,7 @@ import java.util.Optional;
  */
 @Component
 public class UserAuditing
-    implements AuditorAware<String>
+        implements AuditorAware<String>
 {
     /**
      * The current user

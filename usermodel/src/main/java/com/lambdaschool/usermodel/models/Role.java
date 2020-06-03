@@ -20,7 +20,7 @@ import java.util.List;
 @Entity
 @Table(name = "roles")
 public class Role
-    extends Auditable
+        extends Auditable
 {
     /**
      * The primary key (long) of the roles table.
@@ -34,7 +34,7 @@ public class Role
      */
     @NotNull
     @Column(nullable = false,
-        unique = true)
+            unique = true)
     private String name;
 
 
@@ -43,9 +43,9 @@ public class Role
      * connects roles to the user role combination
      */
     @OneToMany(mappedBy = "role",
-        cascade = CascadeType.ALL)
+            cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = "role",
-        allowSetters = true)
+            allowSetters = true)
     private List<UserRoles> users = new ArrayList<>();
 
     /**

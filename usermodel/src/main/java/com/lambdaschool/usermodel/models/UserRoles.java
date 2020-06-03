@@ -23,10 +23,10 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "userroles",
-    uniqueConstraints = {@UniqueConstraint(columnNames = {"userid", "roleid"})})
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"userid", "roleid"})})
 public class UserRoles
-    extends Auditable
-    implements Serializable
+        extends Auditable
+        implements Serializable
 {
     /**
      * 1/2 of the primary key (long) for userroles.
@@ -36,7 +36,7 @@ public class UserRoles
     @ManyToOne
     @JoinColumn(name = "userid")
     @JsonIgnoreProperties(value = "roles",
-        allowSetters = true)
+            allowSetters = true)
     private User user;
 
     /**
@@ -47,7 +47,7 @@ public class UserRoles
     @ManyToOne
     @JoinColumn(name = "roleid")
     @JsonIgnoreProperties(value = "users",
-        allowSetters = true)
+            allowSetters = true)
     private Role role;
 
     /**
@@ -64,8 +64,8 @@ public class UserRoles
      * @param role The role object of this relationship
      */
     public UserRoles(
-        User user,
-        Role role)
+            User user,
+            Role role)
     {
         this.user = user;
         this.role = role;
@@ -124,13 +124,13 @@ public class UserRoles
         }
         UserRoles userRoles = (UserRoles) o;
         return getUser().equals(userRoles.getUser()) &&
-            getRole().equals(userRoles.getRole());
+                getRole().equals(userRoles.getRole());
     }
 
     @Override
     public int hashCode()
     {
         return Objects.hash(getUser(),
-            getRole());
+                getRole());
     }
 }

@@ -32,7 +32,7 @@ public class LogoutController
      */
     // yes, both endpoints are mapped to the same Java method! So, either one will work.
     @RequestMapping(value = {"/oauth/revoke-token", "/logout"},
-        method = RequestMethod.GET)
+            method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public void logoutSelf(HttpServletRequest request)
     {
@@ -41,8 +41,8 @@ public class LogoutController
         {
             // find the token
             String tokenValue = authHeader.replace("Bearer",
-                "")
-                .trim();
+                    "")
+                    .trim();
             // and remove it!
             OAuth2AccessToken accessToken = tokenStore.readAccessToken(tokenValue);
             tokenStore.removeAccessToken(accessToken);

@@ -53,7 +53,7 @@ public class UserModelApplication
         {
             // so run the application!
             SpringApplication.run(UserModelApplication.class,
-                args);
+                    args);
         }
     }
 }

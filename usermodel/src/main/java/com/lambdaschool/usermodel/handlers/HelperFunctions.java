@@ -33,10 +33,10 @@ public class HelperFunctions
         // if either is true, return true
         // otherwise stop the process and throw an exception
         Authentication authentication = SecurityContextHolder.getContext()
-            .getAuthentication();
+                .getAuthentication();
         if (username.equalsIgnoreCase(authentication.getName()
-            .toLowerCase()) || authentication.getAuthorities()
-            .contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
+                .toLowerCase()) || authentication.getAuthorities()
+                .contains(new SimpleGrantedAuthority("ROLE_ADMIN")))
         {
             // this user can make this change
             return true;
@@ -74,7 +74,7 @@ public class HelperFunctions
             {
                 ValidationError newVe = new ValidationError();
                 newVe.setCode(cv.getInvalidValue()
-                    .toString());
+                        .toString());
                 newVe.setMessage(cv.getMessage());
                 listVE.add(newVe);
             }

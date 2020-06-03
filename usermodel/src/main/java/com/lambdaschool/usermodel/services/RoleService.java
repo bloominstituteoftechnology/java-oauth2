@@ -59,7 +59,7 @@ public interface RoleService
      * @return The complete role with the new name
      */
     Role update(
-        long id,
-        Role role);
+            long id,
+            Role role);
 
 }

@@ -18,7 +18,7 @@ import java.util.List;
 @Transactional
 @Service(value = "roleService")
 public class RoleServiceImpl
-    implements RoleService
+        implements RoleService
 {
     /**
      * Connects this service to the Role Model
@@ -47,8 +47,8 @@ public class RoleServiceImpl
          * iterate over the iterator set and add each element to an array list.
          */
         rolerepos.findAll()
-            .iterator()
-            .forEachRemaining(list::add);
+                .iterator()
+                .forEachRemaining(list::add);
         return list;
     }
 
@@ -57,7 +57,7 @@ public class RoleServiceImpl
     public Role findRoleById(long id)
     {
         return rolerepos.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
     }
 
     @Override
@@ -79,7 +79,7 @@ public class RoleServiceImpl
     public Role save(Role role)
     {
         if (role.getUsers()
-            .size() > 0)
+                .size() > 0)
         {
             throw new ResourceFoundException("User Roles are not updated through Role.");
         }
@@ -92,15 +92,15 @@ public class RoleServiceImpl
     public void delete(long id)
     {
         rolerepos.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
         rolerepos.deleteById(id);
     }
 
     @Transactional
     @Override
     public Role update(
-        long id,
-        Role role)
+            long id,
+            Role role)
     {
         if (role.getName() == null)
         {
@@ -108,7 +108,7 @@ public class RoleServiceImpl
         }
 
         if (role.getUsers()
-            .size() > 0)
+                .size() > 0)
         {
             throw new ResourceFoundException("User Roles are not updated through Role. See endpoint POST: users/user/{userid}/role/{roleid}");
         }
@@ -116,9 +116,9 @@ public class RoleServiceImpl
         Role newRole = findRoleById(id); // see if id exists
 
         rolerepos.updateRoleName(userAuditing.getCurrentAuditor()
-                .get(),
-            id,
-            role.getName());
+                        .get(),
+                id,
+                role.getName());
         return findRoleById(id);
     }
 }

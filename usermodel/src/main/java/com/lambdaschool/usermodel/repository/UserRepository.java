@@ -14,7 +14,7 @@ import java.util.List;
  * The CRUD repository connecting User to the rest of the application
  */
 public interface UserRepository
-    extends CrudRepository<User, Long>
+        extends CrudRepository<User, Long>
 {
     /**
      * Find a user based off over username
@@ -41,7 +41,7 @@ public interface UserRepository
      * @return List (element type is the interface UserNameCountEmails) containing usernames and the number of emails they have - not counting the primary email
      */
     @Query(value = "SELECT u.username as usernamerpt, count(ue.useremailid) as countemails FROM users u JOIN useremails ue ON u.userid = ue.userid GROUP BY u.username",
-        nativeQuery = true)
+            nativeQuery = true)
     List<UserNameCountEmails> getCountUserEmails();
 
     /**
@@ -52,10 +52,10 @@ public interface UserRepository
      * @return A single number, a count
      */
     @Query(value = "SELECT COUNT(*) as count FROM userroles WHERE userid = :userid AND roleid = :roleid",
-        nativeQuery = true)
+            nativeQuery = true)
     JustTheCount checkUserRolesCombo(
-        long userid,
-        long roleid);
+            long userid,
+            long roleid);
 
     /**
      * Deletes the given user, role combination
@@ -67,8 +67,8 @@ public interface UserRepository
     @Modifying
     @Query(value = "DELETE FROM UserRoles WHERE userid = :userid AND roleid = :roleid")
     void deleteUserRoles(
-        long userid,
-        long roleid);
+            long userid,
+            long roleid);
 
     /**
      * Inserts the new user role combination
@@ -80,9 +80,9 @@ public interface UserRepository
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO userroles(userid, roleid, created_by, created_date, last_modified_by, last_modified_date) VALUES (:userid, :roleid, :uname, CURRENT_TIMESTAMP, :uname, CURRENT_TIMESTAMP)",
-        nativeQuery = true)
+            nativeQuery = true)
     void insertUserRoles(
-        String uname,
-        long userid,
-        long roleid);
+            String uname,
+            long userid,
+            long roleid);
 }

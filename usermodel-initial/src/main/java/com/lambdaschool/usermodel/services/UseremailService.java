@@ -42,8 +42,8 @@ public interface UseremailService
      * @return The Useremail object that you updated including the new email address
      */
     Useremail update(
-        long useremailid,
-        String emailaddress);
+            long useremailid,
+            String emailaddress);
 
     /**
      * Add a new User Email combination
@@ -53,8 +53,8 @@ public interface UseremailService
      * @return the new user email combination
      */
     Useremail save(
-        long userid,
-        String emailaddress);
+            long userid,
+            String emailaddress);
 
     /**
      * Return a list of user email combinations based on the given username

@@ -3006,3 +3006,39 @@ Status OK
 ```
 
 </details>
+
+---
+
+<details>
+<summary>POST http://localhost:2019/createnewuser</summary>
+
+Data
+
+```JSON
+{
+    "username": "stumps",
+    "password": "ILuvM4th!",
+    "primaryemail": "cuteness@home.local"
+}
+```
+
+OUTPUT
+
+```JSON
+{
+    "access_token": "93b627fe-8753-4715-a848-4130250b6c85",
+    "token_type": "bearer",
+    "scope": "read trust write"
+}
+```
+
+</details>
+
+<details>
+<summary>http://localhost:2019/logout</summary>
+
+Use the authorization code from the createnewuser.
+
+Authorization Code becomes invalid
+
+</details>

@@ -73,8 +73,8 @@ public interface UserService
      * @return the complete user object that got updated
      */
     User update(
-        User user,
-        long id);
+            User user,
+            long id);
 
     /**
      * Deletes a given user role combination
@@ -83,8 +83,8 @@ public interface UserService
      * @param roleid The role id of the role part of this user role combination
      */
     void deleteUserRole(
-        long userid,
-        long roleid);
+            long userid,
+            long roleid);
 
     /**
      * Adds a given user role combination
@@ -93,8 +93,8 @@ public interface UserService
      * @param roleid The role id of the role part of this user role combination
      */
     void addUserRole(
-        long userid,
-        long roleid);
+            long userid,
+            long roleid);
 
     /**
      * List containing usernames and the number of emails they have - not counting the primary email
