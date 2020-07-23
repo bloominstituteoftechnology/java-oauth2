@@ -39,12 +39,12 @@ public class UseremailController
      * @return JSON list of all users emails
      */
     @GetMapping(value = "/useremails",
-            produces = {"application/json"})
+            produces = "application/json")
     public ResponseEntity<?> listAllUseremails()
     {
         List<Useremail> allUserEmails = useremailService.findAll();
         return new ResponseEntity<>(allUserEmails,
-                HttpStatus.OK);
+                                    HttpStatus.OK);
     }
 
     /**
@@ -55,14 +55,14 @@ public class UseremailController
      * @return JSON object of the user email combination you seek with a status of OK
      */
     @GetMapping(value = "/useremail/{useremailId}",
-            produces = {"application/json"})
+            produces = "application/json")
     public ResponseEntity<?> getUserEmailById(
             @PathVariable
                     Long useremailId)
     {
         Useremail ue = useremailService.findUseremailById(useremailId);
         return new ResponseEntity<>(ue,
-                HttpStatus.OK);
+                                    HttpStatus.OK);
     }
 
     /**
@@ -97,7 +97,7 @@ public class UseremailController
                     String emailaddress)
     {
         useremailService.update(useremailid,
-                emailaddress);
+                                emailaddress);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -115,12 +115,11 @@ public class UseremailController
             @PathVariable
                     long userid,
             @PathVariable
-                    String emailaddress)
-            throws
+                    String emailaddress) throws
             URISyntaxException
     {
         Useremail newUserEmail = useremailService.save(userid,
-                emailaddress);
+                                                       emailaddress);
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -131,25 +130,7 @@ public class UseremailController
         responseHeaders.setLocation(newUserEmailURI);
 
         return new ResponseEntity<>(null,
-                responseHeaders,
-                HttpStatus.CREATED);
-    }
-
-    /**
-     * Finds the emails associated with the given user. Does not include primary email!
-     * <br>Example: http://localhost:2019/useremails/username/cinnamon
-     *
-     * @param userName The username (String) of the user email combinations you seek.
-     * @return JSON list of the user email combinations associated with the given user
-     */
-    @GetMapping(value = "/username/{userName}",
-            produces = {"application/json"})
-    public ResponseEntity<?> findUseremailByUserName(
-            @PathVariable
-                    String userName)
-    {
-        List<Useremail> theUseremails = useremailService.findByUserName(userName);
-        return new ResponseEntity<>(theUseremails,
-                HttpStatus.OK);
+                                    responseHeaders,
+                                    HttpStatus.CREATED);
     }
 }

@@ -1,7 +1,5 @@
 package com.lambdaschool.usermodel.services;
 
-import com.lambdaschool.usermodel.exceptions.ResourceFoundException;
-import com.lambdaschool.usermodel.exceptions.ResourceNotFoundException;
 import com.lambdaschool.usermodel.models.Role;
 import com.lambdaschool.usermodel.repository.RoleRepository;
 import com.lambdaschool.usermodel.repository.UserRepository;
@@ -9,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +24,13 @@ public class RoleServiceImpl
      * Connects this service to the Role Model
      */
     @Autowired
-    private RoleRepository rolerepos;
+    RoleRepository rolerepos;
 
     /**
-     * Connects this service to the User Model
+     * Connect this service to the User Model
      */
     @Autowired
-    private UserRepository userrepos;
+    UserRepository userrepos;
 
     /**
      * Connects this service to the auditing service in order to get current user name
@@ -57,7 +57,7 @@ public class RoleServiceImpl
     public Role findRoleById(long id)
     {
         return rolerepos.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
+                .orElseThrow(() -> new EntityNotFoundException("Role id " + id + " not found!"));
     }
 
     @Override
@@ -70,7 +70,7 @@ public class RoleServiceImpl
             return rr;
         } else
         {
-            throw new ResourceNotFoundException(name);
+            throw new EntityNotFoundException(name);
         }
     }
 
@@ -81,7 +81,7 @@ public class RoleServiceImpl
         if (role.getUsers()
                 .size() > 0)
         {
-            throw new ResourceFoundException("User Roles are not updated through Role.");
+            throw new EntityExistsException("User Roles are not updated through Role.");
         }
 
         return rolerepos.save(role);
@@ -89,36 +89,33 @@ public class RoleServiceImpl
 
     @Transactional
     @Override
-    public void delete(long id)
+    public void deleteAll()
     {
-        rolerepos.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
-        rolerepos.deleteById(id);
+        rolerepos.deleteAll();
     }
 
     @Transactional
     @Override
-    public Role update(
-            long id,
-            Role role)
+    public Role update(long id,
+                       Role role)
     {
         if (role.getName() == null)
         {
-            throw new ResourceNotFoundException("No role name found to update!");
+            throw new EntityNotFoundException("No role name found to update!");
         }
 
         if (role.getUsers()
                 .size() > 0)
         {
-            throw new ResourceFoundException("User Roles are not updated through Role. See endpoint POST: users/user/{userid}/role/{roleid}");
+            throw new EntityExistsException("User Roles are not updated through Role. See endpoint POST: users/user/{userid}/role/{roleid}");
         }
 
         Role newRole = findRoleById(id); // see if id exists
 
         rolerepos.updateRoleName(userAuditing.getCurrentAuditor()
-                        .get(),
-                id,
-                role.getName());
+                                         .get(),
+                                 id,
+                                 role.getName());
         return findRoleById(id);
     }
 }

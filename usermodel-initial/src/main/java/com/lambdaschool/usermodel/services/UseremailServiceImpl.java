@@ -1,6 +1,5 @@
 package com.lambdaschool.usermodel.services;
 
-import com.lambdaschool.usermodel.exceptions.ResourceNotFoundException;
 import com.lambdaschool.usermodel.models.User;
 import com.lambdaschool.usermodel.models.Useremail;
 import com.lambdaschool.usermodel.repository.UseremailRepository;
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class UseremailServiceImpl
     public Useremail findUseremailById(long id)
     {
         return useremailrepos.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Useremail with id " + id + " Not Found!"));
+                .orElseThrow(() -> new EntityNotFoundException("Useremail with id " + id + " Not Found!"));
     }
 
     @Transactional
@@ -62,7 +62,7 @@ public class UseremailServiceImpl
             useremailrepos.deleteById(id);
         } else
         {
-            throw new ResourceNotFoundException("Useremail with id " + id + " Not Found!");
+            throw new EntityNotFoundException("Useremail with id " + id + " Not Found!");
         }
     }
 
@@ -80,7 +80,7 @@ public class UseremailServiceImpl
             return useremailrepos.save(useremail);
         } else
         {
-            throw new ResourceNotFoundException("Useremail with id " + useremailid + " Not Found!");
+            throw new EntityNotFoundException("Useremail with id " + useremailid + " Not Found!");
         }
     }
 
@@ -93,13 +93,7 @@ public class UseremailServiceImpl
         User currentUser = userService.findUserById(userid);
 
         Useremail newUserEmail = new Useremail(currentUser,
-                emailaddress);
+                                               emailaddress);
         return useremailrepos.save(newUserEmail);
-    }
-
-    @Override
-    public List<Useremail> findByUserName(String username)
-    {
-        return useremailrepos.findAllByUser_Username(username.toLowerCase());
     }
 }

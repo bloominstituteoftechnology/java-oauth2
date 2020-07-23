@@ -26,7 +26,9 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The class allows access to endpoints that are open to all users regardless of authentication status.
@@ -74,9 +76,9 @@ public class OpenController
         newuser.setPrimaryemail(newminuser.getPrimaryemail());
 
         // add the default role of user
-        List<UserRoles> newRoles = new ArrayList<>();
+        Set<UserRoles> newRoles = new HashSet<>();
         newRoles.add(new UserRoles(newuser,
-                roleService.findByName("user")));
+                                   roleService.findByName("user")));
         newuser.setRoles(newRoles);
 
         newuser = userService.save(newuser);
