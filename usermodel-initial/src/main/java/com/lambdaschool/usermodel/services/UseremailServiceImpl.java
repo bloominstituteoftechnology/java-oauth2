@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
+import com.lambdaschool.usermodel.exceptions.ResourceNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class UseremailServiceImpl
     public Useremail findUseremailById(long id)
     {
         return useremailrepos.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Useremail with id " + id + " Not Found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Useremail with id " + id + " Not Found!"));
     }
 
     @Transactional
@@ -62,7 +62,7 @@ public class UseremailServiceImpl
             useremailrepos.deleteById(id);
         } else
         {
-            throw new EntityNotFoundException("Useremail with id " + id + " Not Found!");
+            throw new ResourceNotFoundException("Useremail with id " + id + " Not Found!");
         }
     }
 
@@ -80,7 +80,7 @@ public class UseremailServiceImpl
             return useremailrepos.save(useremail);
         } else
         {
-            throw new EntityNotFoundException("Useremail with id " + useremailid + " Not Found!");
+            throw new ResourceNotFoundException("Useremail with id " + useremailid + " Not Found!");
         }
     }
 

@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
+import com.lambdaschool.usermodel.exceptions.ResourceFoundException;
+import com.lambdaschool.usermodel.exceptions.ResourceNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class RoleServiceImpl
     public Role findRoleById(long id)
     {
         return rolerepos.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Role id " + id + " not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
     }
 
     @Override
@@ -70,7 +70,7 @@ public class RoleServiceImpl
             return rr;
         } else
         {
-            throw new EntityNotFoundException(name);
+            throw new ResourceNotFoundException(name);
         }
     }
 
@@ -81,7 +81,7 @@ public class RoleServiceImpl
         if (role.getUsers()
                 .size() > 0)
         {
-            throw new EntityExistsException("User Roles are not updated through Role.");
+            throw new ResourceFoundException("User Roles are not updated through Role.");
         }
 
         return rolerepos.save(role);
@@ -101,13 +101,13 @@ public class RoleServiceImpl
     {
         if (role.getName() == null)
         {
-            throw new EntityNotFoundException("No role name found to update!");
+            throw new ResourceNotFoundException("No role name found to update!");
         }
 
         if (role.getUsers()
                 .size() > 0)
         {
-            throw new EntityExistsException("User Roles are not updated through Role. See endpoint POST: users/user/{userid}/role/{roleid}");
+            throw new ResourceFoundException("User Roles are not updated through Role. See endpoint POST: users/user/{userid}/role/{roleid}");
         }
 
         Role newRole = findRoleById(id); // see if id exists

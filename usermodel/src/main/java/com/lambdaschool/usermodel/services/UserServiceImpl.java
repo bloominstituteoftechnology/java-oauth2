@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
+import com.lambdaschool.usermodel.exceptions.ResourceNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +34,10 @@ public class UserServiceImpl
     private RoleService roleService;
 
     public User findUserById(long id) throws
-            EntityNotFoundException
+            ResourceNotFoundException
     {
         return userrepos.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User id " + id + " not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("User id " + id + " not found!"));
     }
 
     @Override
@@ -65,7 +65,7 @@ public class UserServiceImpl
     public void delete(long id)
     {
         userrepos.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User id " + id + " not found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("User id " + id + " not found!"));
         userrepos.deleteById(id);
     }
 
@@ -75,7 +75,7 @@ public class UserServiceImpl
         User uu = userrepos.findByUsername(name.toLowerCase());
         if (uu == null)
         {
-            throw new EntityNotFoundException("User name " + name + " not found!");
+            throw new ResourceNotFoundException("User name " + name + " not found!");
         }
         return uu;
     }
@@ -89,7 +89,7 @@ public class UserServiceImpl
         if (user.getUserid() != 0)
         {
             userrepos.findById(user.getUserid())
-                    .orElseThrow(() -> new EntityNotFoundException("User id " + user.getUserid() + " not found!"));
+                    .orElseThrow(() -> new ResourceNotFoundException("User id " + user.getUserid() + " not found!"));
             newUser.setUserid(user.getUserid());
         }
 
