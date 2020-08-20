@@ -31,6 +31,9 @@ public class UseremailServiceImpl
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private HelperFunctions helperFunctions;
+
     @Override
     public List<Useremail> findAll()
     {
@@ -57,9 +60,15 @@ public class UseremailServiceImpl
     public void delete(long id)
     {
         if (useremailrepos.findById(id)
-                .isPresent())
+            .isPresent())
         {
-            useremailrepos.deleteById(id);
+            if (helperFunctions.isAuthorizedToMakeChange(useremailrepos.findById(id)
+                .get()
+                .getUser()
+                .getUsername()))
+            {
+                useremailrepos.deleteById(id);
+            }
         } else
         {
             throw new ResourceNotFoundException("Useremail with id " + id + " Not Found!");
@@ -73,11 +82,22 @@ public class UseremailServiceImpl
             String emailaddress)
     {
         if (useremailrepos.findById(useremailid)
-                .isPresent())
+            .isPresent())
         {
-            Useremail useremail = findUseremailById(useremailid);
-            useremail.setUseremail(emailaddress.toLowerCase());
-            return useremailrepos.save(useremail);
+            if (helperFunctions.isAuthorizedToMakeChange(useremailrepos.findById(useremailid)
+                .get()
+                .getUser()
+                .getUsername()))
+            {
+                Useremail useremail = findUseremailById(useremailid);
+                useremail.setUseremail(emailaddress.toLowerCase());
+                return useremailrepos.save(useremail);
+            } else
+            {
+                // note we should never get to this line but is needed for the compiler
+                // to recognize that this exception can be thrown
+                throw new ResourceNotFoundException("This user is not authorized to make change");
+            }
         } else
         {
             throw new ResourceNotFoundException("Useremail with id " + useremailid + " Not Found!");
@@ -92,8 +112,16 @@ public class UseremailServiceImpl
     {
         User currentUser = userService.findUserById(userid);
 
-        Useremail newUserEmail = new Useremail(currentUser,
-                                               emailaddress);
-        return useremailrepos.save(newUserEmail);
+        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getUsername()))
+        {
+            Useremail newUserEmail = new Useremail(currentUser,
+                emailaddress);
+            return useremailrepos.save(newUserEmail);
+        } else
+        {
+            // note we should never get to this line but is needed for the compiler
+            // to recognize that this exception can be thrown
+            throw new ResourceNotFoundException("This user is not authorized to make change");
+        }
     }
 }

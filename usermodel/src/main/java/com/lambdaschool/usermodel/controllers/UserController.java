@@ -2,10 +2,12 @@ package com.lambdaschool.usermodel.controllers;
 
 import com.lambdaschool.usermodel.models.User;
 import com.lambdaschool.usermodel.services.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -209,5 +211,24 @@ public class UserController
     {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * Returns the User record for the currently authenticated user based off of the supplied access token
+     * <br>Example: <a href="http://localhost:2019/users/getuserinfo">http://localhost:2019/users/getuserinfo</a>
+     *
+     * @param authentication The authenticated user object provided by Spring Security
+     * @return JSON of the current user. Status of OK
+     * @see UserService#findByName(String) UserService.findByName(authenticated user)
+     */
+    @ApiOperation(value = "returns the currently authenticated user",
+        response = User.class)
+    @GetMapping(value = "/getuserinfo",
+        produces = {"application/json"})
+    public ResponseEntity<?> getCurrentUserInfo(Authentication authentication)
+    {
+        User u = userService.findByName(authentication.getName());
+        return new ResponseEntity<>(u,
+            HttpStatus.OK);
     }
 }
