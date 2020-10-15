@@ -1,6 +1,7 @@
 package com.lambdaschool.usermodel.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lambdaschool.usermodel.UserModelApplication;
 import com.lambdaschool.usermodel.models.Role;
 import com.lambdaschool.usermodel.models.User;
 import com.lambdaschool.usermodel.models.UserRoles;
@@ -14,10 +15,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -39,14 +40,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // mocking service to test controller
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
-@WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
+@WebMvcTest(value = UserModelApplication.class)
 public class UserControllerUnitTest
 {
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
     private MockMvc mockMvc;
 
     @MockBean
@@ -146,12 +142,6 @@ public class UserControllerUnitTest
             System.out.println(u);
         }
         System.out.println("*** Seed Data ***\n");
-
-        RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
-
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-                .apply(SecurityMockMvcConfigurers.springSecurity())
-                .build();
     }
 
     @After

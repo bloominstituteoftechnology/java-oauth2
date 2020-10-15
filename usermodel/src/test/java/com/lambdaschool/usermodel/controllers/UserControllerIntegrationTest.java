@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,7 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
 public class UserControllerIntegrationTest
 {
     @Autowired
@@ -44,10 +42,6 @@ public class UserControllerIntegrationTest
             Exception
     {
         RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
-
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-                .apply(SecurityMockMvcConfigurers.springSecurity())
-                .build();
     }
 
     @After
@@ -56,7 +50,6 @@ public class UserControllerIntegrationTest
     {
     }
 
-    @WithUserDetails("admin")
     @Test
     public void whenMeasuredResponseTime() throws
             Exception
@@ -69,7 +62,6 @@ public class UserControllerIntegrationTest
         assertTrue("timestamp", (responseTime < 5000L));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void getAllUsers() throws
             Exception
@@ -80,7 +72,6 @@ public class UserControllerIntegrationTest
                 .andExpect(content().string(containsString("cinnamon")));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void getUserInfo() throws
             Exception
@@ -91,7 +82,6 @@ public class UserControllerIntegrationTest
                 .andExpect(content().string(containsString("admin")));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void getUserLikeName() throws
             Exception
@@ -102,7 +92,6 @@ public class UserControllerIntegrationTest
                 .andExpect(content().string(containsString("misskitty")));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void getUserById() throws
             Exception
@@ -114,7 +103,6 @@ public class UserControllerIntegrationTest
                 .andExpect(content().string(containsString("admin")));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void getUserByIdNotFound() throws
             Exception
@@ -126,7 +114,6 @@ public class UserControllerIntegrationTest
                 .andExpect(content().string(containsString("ResourceNotFoundException")));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void getUserByName() throws
             Exception
@@ -138,7 +125,6 @@ public class UserControllerIntegrationTest
                 .andExpect(content().string(containsString("admin")));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void getUserByNameNotFound() throws
             Exception
@@ -150,7 +136,6 @@ public class UserControllerIntegrationTest
                 .andExpect(content().string(containsString("ResourceNotFoundException")));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void givenPostAUser() throws
             Exception
@@ -165,7 +150,6 @@ public class UserControllerIntegrationTest
                                    .exists("location"));
     }
 
-    @WithUserDetails("admin")
     @Test
     public void deleteUserById() throws
             Exception
@@ -176,7 +160,6 @@ public class UserControllerIntegrationTest
                 .andExpect(status().is2xxSuccessful());
     }
 
-    @WithUserDetails("admin")
     @Test
     public void deleteUserByIdNotFound() throws
             Exception
@@ -187,7 +170,6 @@ public class UserControllerIntegrationTest
                 .andExpect(status().is4xxClientError());
     }
 
-    @WithUserDetails("admin")
     @Test
     public void UpdateUser() throws
             Exception
