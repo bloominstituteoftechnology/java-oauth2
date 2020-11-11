@@ -10,14 +10,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import javax.validation.ConstraintViolation;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service(value = "helperFunctions")
 public class HelperFunctionsImpl
-        implements HelperFunctions
+    implements HelperFunctions
 {
+    /**
+     * A public field used to store data from another API. This will have to be populated each time the application is run.
+     * Population is done manually for each country code using an endpoint.
+     */
     public List<ValidationError> getConstraintViolation(Throwable cause)
     {
         // Find any data violations that might be associated with the error and report them
@@ -90,5 +93,4 @@ public class HelperFunctionsImpl
             throw new ResourceNotFoundException(authentication.getName() + " not authorized to make change");
         }
     }
-
 }
