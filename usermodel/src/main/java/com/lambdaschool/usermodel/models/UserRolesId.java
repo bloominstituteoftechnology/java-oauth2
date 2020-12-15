@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 @Embeddable
 public class UserRolesId
-        implements Serializable
+    implements Serializable
 {
     /**
      * The id of the user
@@ -80,7 +80,7 @@ public class UserRolesId
         }
         UserRolesId that = (UserRolesId) o;
         return user == that.user &&
-                role == that.role;
+            role == that.role;
     }
 
     @Override

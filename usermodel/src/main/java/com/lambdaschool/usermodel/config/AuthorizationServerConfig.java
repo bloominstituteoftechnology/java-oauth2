@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig
-        extends AuthorizationServerConfigurerAdapter
+    extends AuthorizationServerConfigurerAdapter
 {
     /**
      * Client Id is the user name for the client application. It is read from the environment variable OAUTHCLIENTID
@@ -95,18 +95,18 @@ public class AuthorizationServerConfig
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer configurer)
-            throws
-            Exception
+        throws
+        Exception
     {
         configurer.inMemory()
-                .withClient(CLIENT_ID)
-                .secret(encoder.encode(CLIENT_SECRET))
-                .authorizedGrantTypes(GRANT_TYPE_PASSWORD,
-                        AUTHORIZATION_CODE)
-                .scopes(SCOPE_READ,
-                        SCOPE_WRITE,
-                        TRUST)
-                .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS);
+            .withClient(CLIENT_ID)
+            .secret(encoder.encode(CLIENT_SECRET))
+            .authorizedGrantTypes(GRANT_TYPE_PASSWORD,
+                AUTHORIZATION_CODE)
+            .scopes(SCOPE_READ,
+                SCOPE_WRITE,
+                TRUST)
+            .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS);
     }
 
     /**
@@ -119,13 +119,13 @@ public class AuthorizationServerConfig
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints)
-            throws
-            Exception
+        throws
+        Exception
     {
         endpoints.tokenStore(tokenStore)
-                .authenticationManager(authenticationManager);
+            .authenticationManager(authenticationManager);
         // here instead of our clients requesting authentication at the endpoint /oauth/token, they request it at the endpoint /login
         endpoints.pathMapping("/oauth/token",
-                "/login");
+            "/login");
     }
 }

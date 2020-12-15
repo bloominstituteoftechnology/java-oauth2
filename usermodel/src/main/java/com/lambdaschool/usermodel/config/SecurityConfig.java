@@ -14,8 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
-import javax.annotation.Resource;
-
 /**
  * This class allows us to set standard security protocols to be used throughout the application,
  * such as password encoding, location of token store, our implementation of users, among others
@@ -25,7 +23,7 @@ import javax.annotation.Resource;
 // This allows us to further restrict access to an endpoint inside of a controller.
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig
-        extends WebSecurityConfigurerAdapter
+    extends WebSecurityConfigurerAdapter
 {
     /**
      * Allows us to customize the Authentication Manager. Normally, as we do here, we just take the defaults.
@@ -36,8 +34,8 @@ public class SecurityConfig
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean()
-            throws
-            Exception
+        throws
+        Exception
     {
         return super.authenticationManagerBean();
     }
@@ -56,11 +54,11 @@ public class SecurityConfig
      */
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth)
-            throws
-            Exception
+        throws
+        Exception
     {
         auth.userDetailsService(securityUserService)
-                .passwordEncoder(encoder());
+            .passwordEncoder(encoder());
     }
 
 
