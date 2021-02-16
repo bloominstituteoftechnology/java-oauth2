@@ -69,6 +69,7 @@ public class ResourceServerConfig
             .authenticated()
             .antMatchers("/roles/**")
             .hasAnyRole("ADMIN")
+            .anyRequest().denyAll() // deny any endpoint that is not explicitly given access rights
             .and()
             .exceptionHandling()
             .accessDeniedHandler(new OAuth2AccessDeniedHandler());

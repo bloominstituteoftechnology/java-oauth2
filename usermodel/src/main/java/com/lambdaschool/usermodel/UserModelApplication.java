@@ -34,6 +34,7 @@ public class UserModelApplication
     {
         if (System.getenv(envvar) == null)
         {
+            System.out.println("***** Environment Variable " + envvar + "Not Found!!! *****");
             stop = true;
         }
     }
@@ -53,10 +54,6 @@ public class UserModelApplication
         {
             SpringApplication.run(UserModelApplication.class,
                 args);
-        } else
-        {
-            System.out.println("Either or both the environment variables OAUTHCLIENTID, OAUTHCLIENTSECRET are not set. " +
-                "They are required for this application to run");
         }
     }
 }
