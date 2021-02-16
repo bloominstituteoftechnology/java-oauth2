@@ -8,6 +8,7 @@ import com.lambdaschool.usermodel.models.Useremail;
 import com.lambdaschool.usermodel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -190,7 +191,7 @@ public class UserServiceImpl
         }
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
     public void deleteAll()
     {
